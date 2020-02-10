@@ -1,73 +1,54 @@
 module controlUnit (input wire clk, start, input wire [1:0] q, output wire resta, desp, fin);
 
-    // Cables
-    // wire d3, d2, d1;
-    // wire q0, q1, q2;
+  reg [2:0] state, nextstate;
 
-    wire [2:0] entrada, salida;
+  // Codificacion de los estados
 
-    // Biestables
-    // ffdc D3 (clk, start, 1'b1, d3, q2);
-    // ffdc D2 (clk, start, 1'b1, d2, q1);
-    // ffdc D1 (clk, start, 1'b1, d1, q0);
+  parameter S0 = 3'b000;
+  parameter S1 = 3'b001;
+  parameter S2 = 3'b010;
+  parameter S3 = 3'b011;
+  parameter S4 = 3'b100;
+  parameter S5 = 3'b101;
+  parameter S6 = 3'b110;
+  parameter S7 = 3'b111;
 
-    registro3 D(entrada, 1'b0, 1'b1, 1'b0, clk, start, salida);
+  // Comprobamos el estado a actualizar
+  always @(posedge clk, posedge start)
+    if (start)
+      state <= S0;
+    else
+      state <= nextstate;
 
-    // assign entrada[1:0] = ~salida[1:0];
+  // Funcion de transicion
+  always @(*)
+    case (state)
+      S0:
+        if (q == 2'b00 || q == 2'b11)
+          nextstate = S2;
+        else
+          nextstate = S1;
+      S1: nextstate = S2;
+      S2:
+        if (q == 2'b00 || q == 2'b11)
+          nextstate = S4;
+        else
+          nextstate = S3;
+      S3: nextstate = S4;  
+      S4:
+        if (q == 2'b00 || q == 2'b11)
+          nextstate = S6;
+        else
+          nextstate = S5;
+      S5: nextstate = S6;
+      S6: nextstate = S7;
+      default: nextstate = S0;
+    endcase
 
-    // Entradas de los biestables
-    // Negadas
-    wire neg_q0, neg_q1, negQ0, neg_Q1, neg_Q2;
+    // Funcion de salida
 
-    assign neg_q0 = ~q[1];
-    assign neg_q1 = ~q[0];
-    assign neg_Q0 = ~salida[0];
-    assign neg_Q1 = ~salida[1];
-    assign neg_Q2 = ~salida[2];
-
-    // Bits de la entrada del registro (D3, D2 y D1)
-    assign entrada[2] = salida[2] | (salida[1] & (salida[0] | (neg_q0 & neg_q1))) | (q[1] & q[0]);
-    assign entrada[1] = (salida[2] & salida[1]) | (neg_Q1 & (salida[0] | (neg_q0 & neg_q1) | (q[1] & q[0])) | (salida[1] & neg_Q0 & ((neg_q0 & q[0]) | (q[1] & neg_q1))));
-    assign entrada[0] = (salida[2] & salida[1]) | (neg_Q0 & ((neg_q0 & q[0]) | (q[1] & neg_q1)));
-    
-
-    // // Salidas
-    // // assign resta = (~q2 & ~q0 & q[1] & ~q[0]) | (~q1 & ~q0 & q[1] & ~q[0]);
-    // // assign desp = (~q2 & q0) | (~q1 & q0) | (~q2 & ~q[1] & ~q[0]) | (~q1 & ~q[1] & ~q[0]) | (~q2 & q[1] & q[0]) | (~q1 & q[1] & q[0]);
-    // // assign fin = q2 & q1;
-
-    assign resta = neg_Q0 & q[1] & q[0] & (neg_Q2 | neg_Q1);
-    assign desp = (salida[0] & (neg_Q2 | neg_Q1)) | (neg_q0 & neg_q1 & (neg_Q2 | neg_Q1)) | (q[1] & q[0] & (neg_Q2 | neg_Q1));
-    assign fin = salida[2] & salida[1];
-
-    // // Resta
-    // wire R_forAnd21, R_forAnd31, R_forAnd32;
-
-    // or R_or1(neg_Q2, neg_Q1, R_forAnd32);
-
-    // and R_and1(neg_Q0, q[1], R_forAnd21);
-
-    // and R_and2(R_forAnd21, neg_q1, R_forAnd31);
-    // and R_and3(R_forAnd31, R_forAnd32, resta);
-
-    // // Desplazamiento
-    // wire sum_neg_21, D_forOr11, D_forAnd31, D_forOr12, D_forOr21;
-    // wire D_forAnd51, D_forOr22;
-
-    // or D_sum_neg_21(neg_Q2, neg_Q1, sum_neg_21);
-
-    // and D_and1(salida[0], sum_neg_21, D_forOr11);
-    // and D_and2(neg_q0, neg_q1, D_forAnd31);
-    // and D_and3(D_forAnd31, sum_neg_21, D_forOr12);
-
-    // or D_or1(D_forOr11, D_forOr12, D_forOr21);
-
-    // and D_and4(q[1], q[0], D_forAnd51);
-    // and D_and5(D_forAnd51, sum_neg_21, D_forOr22);
-
-    // or D_or2(D_forOr21, D_forOr22, desp);
-
-    // // FIN
-    // and fin_and(salida[2], salida[1], fin);
+    assign resta = ((state == S0 || state == S2 || state == S4) && q == 2'b10) ? 1 : 0;
+    assign desp = (((state == S0 || state == S2 || state == S4) && (q == 2'b00 || q == 2'b11)) || (state == S1 || state == S3 || state == S5 || state == S6)) ? 1 : 0;
+    assign fin = (state == S6 || state == S7) ? 1 : 0;
 
 endmodule

@@ -8,7 +8,7 @@ module multiplicador (input wire [2:0] multiplicador, multiplicando, input wire 
   // Camino de datos
   // Le pasamos al camino de datos las señales de control proporcionadas por la unidad de control
   // También le pasamos el multiplicador, el multiplicando, y CLK
-  datapath dp(multiplicador, multiplicando, start, clk, sub, desp, q, resultado);
+  datapath dp(multiplicador, multiplicando, start, fin, clk, sub, desp, q, resultado);
   
   // La UC va a recibir el CLK y posiblemente la señal de start, asi como proporcionar la señal de FIN
   // Tambien recibira q0 y q-1 del camino de datos
