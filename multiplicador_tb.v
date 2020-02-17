@@ -50,12 +50,11 @@ end
 
 always @(posedge Fin)
 begin
-  #2;
   resultado_esperado = multiplicador * multiplicando;
   //Comprobación de resultados
   $write("%d x %d = %d", multiplicando, multiplicador, resultado_esperado);
   if (resultado !== resultado_esperado)
-    $display("\tERROR    Esperado=%b, Obtenido=%d", resultado_esperado, resultado);
+    $display("\tERROR    Esperado=%b, Obtenido=%b", resultado_esperado, resultado);
   else
     $display("\tCORRECTO Obtenido=%b", resultado);
   
