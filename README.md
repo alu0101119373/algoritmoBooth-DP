@@ -7,7 +7,7 @@ El objetivo de esta práctica es realizar un sistema que calcule la multiplicaci
 ## Modelo original
 ---
 La máquina de estados que define la Unidad de Control original es la siguiente:
-<div style="text-align:center;">![Autómata Original](./img/maqEstadosOriginal.png)</div>
+<div style="text-align:center;"><img src="./img/maqEstadosOriginal.png" alt="Autómata Original"></div>
 
 ## Mejoras implementadas
 ---
