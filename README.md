@@ -9,4 +9,4 @@ La máquina de estados que define la Unidad de Control original es la siguiente:
 
 ## Mejoras implementadas
 - Hemos implementado una mejora basada en disminuir el número de estados que recorre la máquina. La máquina de estados mejorada es la siguiente:
-<div style="text-align:center"><img src="./img/maqEstadosOriginal.png" alt="Autómata Mejorado"></div>
+<div><img align="center" src="./img/maqEstadosOriginal.png" alt="Autómata Mejorado"></div>
