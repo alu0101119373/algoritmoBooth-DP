@@ -5,8 +5,10 @@ El objetivo de esta práctica es realizar un sistema que calcule la multiplicaci
 
 ## Modelo original
 La máquina de estados que define la Unidad de Control original es la siguiente:
+
 ![Autómata Original](./img/maqEstadosOriginal.png)
 
 ## Mejoras implementadas
 - Hemos implementado una mejora basada en disminuir el número de estados que recorre la máquina. La máquina de estados mejorada es la siguiente:
+
 ![Autómata Mejorado](./img/maqEstadosOriginal.png)
