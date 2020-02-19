@@ -28,7 +28,7 @@ El fichero `datafiles.txt` contiene una lista con todos los ficheros necesarios 
 ## Problemas ocurridos durante el desarrollo
 Durante el desarrollo de este proyecto han surgido múltiples problemas, sobretodo relacionados con lo oxidado que tenía el lenguaje Verilog. De esta forma, muchos problemas eran que tenía cables sueltos, que no había conectado correctamente los bits de carga de los registros, que no sabía la diferencia entre reg y wire, etc. Sin embargo, un problema destacable fue el siguiente:
 
-Los registros poseen un retraso de 1 ns. Esto hacía que se recibiera la señal de Fin antes de actualizarse el registro A con el último desplazamiento a la derecha. Esto se soluciono fácilmente haciendo que el cambio de estados esperara 1 ns antes de ocurrir, para sincronizarse con los cambios en los biestables.
+Los registros poseen un retraso de 1 ns. Esto hacía que se recibiera la señal de Fin (pues esta señal no posee retrasos) antes de actualizarse el registro A con el último desplazamiento a la derecha. Por tanto, el resultado de las operaciones eran el doble de lo que deberían ser, puesto que no llegó a captar el último desplazamiento hacia la derecha. Esto se soluciono fácilmente haciendo que el cambio de estados esperara 1 ns antes de ocurrir, para sincronizarse con los cambios en los biestables.
 
 ## Información del funcionamiento del sistema
 Para ilustrar el correcto funcionamiento del sistema, podemos observar los resultados mostrados por gtkwave y el resultado de la ejecución del comando `vvp multiplicador.out`:
