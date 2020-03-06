@@ -36,6 +36,8 @@ Durante el desarrollo de este proyecto han surgido múltiples problemas, sobreto
 
 Los registros poseen un retraso de 1 ns. Esto hacía que se recibiera la señal de Fin (pues esta señal no posee retrasos) antes de actualizarse el registro A con el último desplazamiento a la derecha. Por tanto, el resultado de las operaciones eran el doble de lo que deberían ser, puesto que no llegó a captar el último desplazamiento hacia la derecha. Esto se soluciono fácilmente haciendo que el cambio de estados esperara 1 ns antes de ocurrir, para sincronizarse con los cambios en los biestables.
 
+Para la mejora del flanco de bajada, tuve diversos problemas. No sabía exactamente como hacer para que funcionara. Intuía que necesitaba que las señales duraran hasta el flanco de bajada de ese mismo ciclo, pues no lo hacían. Al final la solución fue bastante sencilla: simplemente, al nanosegundo de espera entre un estado y el siguiente en la unidad de control, le añadí 5 nanosegundos más. De esta forma, antes de cambiar de estado, el sistema espera 6 nanosegundos. Ese tiempo fue suficiente para que la unidad de control se sincronizara con el camino de datos y produjera correctamente la salida esperada para cada multiplicación.
+
 ## Información del funcionamiento del sistema
 Para ilustrar el correcto funcionamiento del sistema, podemos observar los resultados mostrados por gtkwave y el resultado de la ejecución del comando `vvp multiplicador.out`:
 
