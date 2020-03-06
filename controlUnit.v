@@ -19,7 +19,7 @@ module controlUnit (input wire clk, start, input wire [1:0] q, output wire resta
     if (start)
       state <= S0;
     else
-      state <= #1 nextstate;
+      state <= #6 nextstate;
 
   // Funcion de transicion
   always @(*)

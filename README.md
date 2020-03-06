@@ -13,6 +13,12 @@ La máquina de estados que define la Unidad de Control original es la siguiente:
 
 ![Autómata Mejorado](./img/maqEstadosMejorada.png)
 
+- Se ha implementado funcionamiento en el flanco de bajada de cada ciclo de reloj. De esta forma, la Unidad de Control indica las señales correspondientes al camino de datos en el flanco de subida, y este camino efectúa las operaciones correspondientes en el flanco de bajada. En la imagen se puede ver como los cambios de los estados y la actualización del camino de datos ocurren en el flanco de bajada.
+
+![Flanco de bajada](./img/flancoBajada.png)
+
+![Correcto Flanco de Bajada](./img/correctoFlancoBajada.png)
+
 ## Compilación
 Para compilar el programa, es recomendable utilizar el script de bash `output.sh`. Este script se encarga tanto de compilar y generar el fichero `multiplicador.out` como mostrar los resultados del test y generar el fichero `multiplicador_tb.vcd` para posterior análisis en el programa gtkwave.
 
