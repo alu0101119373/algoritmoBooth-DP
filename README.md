@@ -31,6 +31,14 @@ El comando utilizado para compilar es el siguiente:
 
 El fichero `datafiles.txt` contiene una lista con todos los ficheros necesarios para compilar correctamente el multiplicador.
 
+Si queremos directamente compilar el proyecto, mostrar los resultados y generar el fichero `multiplicador_tb.vcd`, podemos utilizar el programa `output.sh` proporcionado en el proyecto. Bastará con ejecutar el siguiente comando:
+
+```bash
+
+	./output.sh
+
+```
+
 ## Problemas ocurridos durante el desarrollo
 Durante el desarrollo de este proyecto han surgido múltiples problemas, sobretodo relacionados con lo oxidado que tenía el lenguaje Verilog. De esta forma, muchos problemas eran que tenía cables sueltos, que no había conectado correctamente los bits de carga de los registros, que no sabía la diferencia entre reg y wire, etc. Sin embargo, un problema destacable fue el siguiente:
 
