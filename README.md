@@ -42,3 +42,6 @@ Para la mejora del flanco de bajada, tuve diversos problemas. No sabía exactame
 Para ilustrar el correcto funcionamiento del sistema, podemos observar los resultados mostrados por gtkwave y el resultado de la ejecución del comando `vvp multiplicador.out`:
 
 ![Resultado de gtkwave](./img/resultados_gtkwave.png)
+
+## Autor
+Este proyecto se ha realizado íntegramente por el alumno **Himar Manuel Barquín Carrasco**, para la asignatura de Diseño de Procesadores del tercer año de la carrera de Ingeniería Informática de la Universidad de La Laguna.
